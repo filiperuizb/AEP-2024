@@ -270,7 +270,11 @@ void verLista() {
 
     gotoxy(18, 7);
     printf("Usuários criptografados:\n");
-    int linha_y = 8; 
+    setColor(12);
+	gotoxy(18,8);
+    printf("_____________________________");
+    setColor(15);
+    int linha_y = 9; 
     while (fgets(linha, MAX, arquivo) != NULL) {
         gotoxy(18, linha_y++);
         printf("%s", linha);

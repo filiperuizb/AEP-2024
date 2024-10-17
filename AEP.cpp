@@ -246,7 +246,7 @@ void removerUsuario() {
     scanf("%s", usuario);
     criptografar(usuario);
 
-    // Abrir o arquivo original e criar um temporário
+    // Abrindo arquivo usuarios 
     arquivo = fopen("usuarios.txt", "r");
     temp = fopen("temp.txt", "w");
     if (arquivo == NULL || temp == NULL) {
@@ -389,10 +389,10 @@ void exibirMenu() {
         tecla = getch();
         if (tecla == 224) {
             tecla = getch();
-            if (tecla == 72) { // Arrow up
+            if (tecla == 72) { // Seta pra cima
                 opcao--;
                 if (opcao < 0) opcao = 4;
-            } else if (tecla == 80) { // Arrow down
+            } else if (tecla == 80) { // Seta pra baixo
                 opcao++;
                 if (opcao > 4) opcao = 0;
             }

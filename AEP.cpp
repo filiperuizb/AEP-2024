@@ -8,14 +8,131 @@
 
 #define MAX 100
 
+
+//Criação das funções ---> 
 void tiraCursor();
 void criptografia(char *senha);
 void gotoxy(int x, int y);
 void setColor(int color);
 void desenharMoldura();
+bool verificaSenha(const char *senha);
+void inserirUsuario();
+void verLista();
+void removerUsuario();
+void efeitoDigitacao(const char *texto);
+void exibirInformacoes();
+void exibirMenu();
+
+// PRINCIPAL ------>
+int main() {
+    setlocale(LC_ALL, "Portuguese");
+    tiraCursor();
+    exibirMenu();
+    return 0;
+}
+
+/*-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+-> Função pra tirar o cursor que aparece lá em baixo pra digitar no menu principal */
+
+void tiraCursor() {
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    CONSOLE_CURSOR_INFO cursorInfo;
+    GetConsoleCursorInfo(hConsole, &cursorInfo); 
+    cursorInfo.bVisible = FALSE; 
+    SetConsoleCursorInfo(hConsole, &cursorInfo); 
+}
+/*-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 
-//Checa a senha
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+-> Criptografia | Foi usado ponteiro pra apontar direto pro primeiro caracter sem precisar declarar diferente do array */
+
+void criptografia(char *senha) {
+    while (*senha) {
+        *senha += 7; 
+        senha++;
+    }
+}
+/*-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+-> Coordenadas da tela*/
+
+void gotoxy(int x, int y) {
+    COORD coord;
+    coord.X = x;
+    coord.Y = y;
+    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
+}
+/*-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+-> Mudar a cor dos textos */
+
+void setColor(int color) {
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
+    
+    /* 
+	CORES:
+	0	Preto
+	1	Azul
+	2	Verde
+	3	Azul claro
+	4	Vermelho
+	5	Roxo
+	6	Amarelo
+	7	Branco claro
+	8	Cinza
+	9	Azul claro
+	10	Verde claro
+	11	Azul piscina
+	12	Vermelho claro
+	13	Rosa
+	14	Amarelo claro
+	15	Branco
+	*/
+}
+/*-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+-> Faz a moldura em volta do Menu */
+
+void desenharMoldura() {
+    int i;
+
+    setColor(12); 
+
+   // Aep-2024
+    for (i = 16; i <= 64; i++) {
+        gotoxy(i, 2); printf("_");
+    }
+    gotoxy(35, 2); printf("AEP - 2024");
+
+    // Retas
+    for (i = 16; i <= 64; i++) {
+        gotoxy(i, 3); printf("_");
+        gotoxy(i, 18); printf("_");
+    }
+
+    // Verticais
+    for (i = 4; i < 18; i++) {
+        gotoxy(15, i); printf("|");
+        gotoxy(65, i); printf("|");
+    }
+
+	//Cantos
+    gotoxy(15, 3); printf("|");
+    gotoxy(65, 3); printf("|");
+    gotoxy(15, 18); printf("|");
+    gotoxy(65, 18); printf("|");
+
+    setColor(15);
+}
+/* -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+-> Checa a senha */
+
 bool verificaSenha(const char *senha) {
     bool v1,v2,v3,v4,v5;
 	v1=v2=v3=v4=v5 = false;
@@ -42,8 +159,11 @@ bool verificaSenha(const char *senha) {
     // Valida se tudo se estiver verdadeiro
     return v1 && v2 && v3 && v4 && v5;
 }
+/*-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-// Menu - Inserir usuário
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+-> Menu - Inserir usuário */
+
 void inserirUsuario() {
     char usuario[MAX], senha[MAX];
     FILE *arquivo;
@@ -123,8 +243,11 @@ void inserirUsuario() {
     printf("Para voltar, pressione qualquer tecla");
     getch(); 
 }
+/*-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-// Menu - lista de usuários criptografados
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+-> Menu - lista de usuários criptografados */
+
 void verLista() {
     char linha[MAX];
     FILE *arquivo;
@@ -160,8 +283,11 @@ void verLista() {
     printf("Para voltar, pressione qualquer tecla");
     getch(); 
 }
+/*-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-// Menu - Remover Usuario
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+-> Menu - Remover Usuario */
+
 void removerUsuario() {
     char usuario[MAX], linha[MAX];
     FILE *arquivo, *temp;
@@ -216,7 +342,6 @@ void removerUsuario() {
     getch(); 
 }
 
-
 //Efeito pra parecer que o computador está digitando
 void efeitoDigitacao(const char *texto) {
     while (*texto) {
@@ -225,8 +350,11 @@ void efeitoDigitacao(const char *texto) {
         texto++;
     }
 }
+/*-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-//Menu de informações
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+-> Menu de informações */
+
 void exibirInformacoes() {
     system("cls");
     desenharMoldura();
@@ -284,7 +412,11 @@ void exibirInformacoes() {
     setColor(15); 
     getch(); 
 }
-// Menu
+/*-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+-> Menu */
+
 void exibirMenu() {
     int opcao = 0;
     int tecla;
@@ -355,100 +487,10 @@ void exibirMenu() {
                     break;
                 case 4:
                     sair = true;
-                    break;
+                    break;;
             }
         }
     } while (!sair);
 }
-
-
-
-int main() {
-    setlocale(LC_ALL, "Portuguese");
-    tiraCursor();
-    exibirMenu();
-    return 0;
-}
-
-//Função pra tirar o cursor que aparece lá em baixo pra digitar no menu principal
-void tiraCursor() {
-    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-    CONSOLE_CURSOR_INFO cursorInfo;
-    GetConsoleCursorInfo(hConsole, &cursorInfo); 
-    cursorInfo.bVisible = FALSE; 
-    SetConsoleCursorInfo(hConsole, &cursorInfo); 
-}
-
-//Criptografia | Foi usado ponteiro pra apontar direto pro primeiro caracter sem precisar declarar diferente do array
-void criptografia(char *senha) {
-    while (*senha) {
-        *senha += 7; 
-        senha++;
-    }
-}
-
-// Mover a tela
-void gotoxy(int x, int y) {
-    COORD coord;
-    coord.X = x;
-    coord.Y = y;
-    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
-}
-
-// Mudar a cor dos textos
-void setColor(int color) {
-    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
-    
-    /* 
-	CORES:
-	0	Preto
-	1	Azul
-	2	Verde
-	3	Azul claro
-	4	Vermelho
-	5	Roxo
-	6	Amarelo
-	7	Branco claro
-	8	Cinza
-	9	Azul claro
-	10	Verde claro
-	11	Azul piscina
-	12	Vermelho claro
-	13	Rosa
-	14	Amarelo claro
-	15	Branco
-	*/
-}
-
-//Faz a moldura em volta do Menu
-void desenharMoldura() {
-    int i;
-
-    setColor(12); 
-
-   // Aep-2024
-    for (i = 16; i <= 64; i++) {
-        gotoxy(i, 2); printf("_");
-    }
-    gotoxy(35, 2); printf("AEP - 2024");
-
-    // Retas
-    for (i = 16; i <= 64; i++) {
-        gotoxy(i, 3); printf("_");
-        gotoxy(i, 18); printf("_");
-    }
-
-    // Verticais
-    for (i = 4; i < 18; i++) {
-        gotoxy(15, i); printf("|");
-        gotoxy(65, i); printf("|");
-    }
-
-	//Cantos
-    gotoxy(15, 3); printf("|");
-    gotoxy(65, 3); printf("|");
-    gotoxy(15, 18); printf("|");
-    gotoxy(65, 18); printf("|");
-
-    setColor(15);
-}
+/*-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+fim; */

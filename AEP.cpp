@@ -17,10 +17,10 @@ void tiraCursor() {
     SetConsoleCursorInfo(hConsole, &cursorInfo); 
 }
 
-//Criptografia
+//Criptografia | Foi usado ponteiro pra apontar direto pro primeiro caracter sem precisar declarar diferente do array
 void criptografar(char *str) {
     while (*str) {
-        *str = *str + 3; 
+        *str = *str + 7; 
         str++;
     }
 }
@@ -62,7 +62,7 @@ void setColor(int color) {
 void desenharMoldura() {
     int i;
 
-    setColor(12); // 12 | Cor vermelha
+    setColor(12); 
 
    // Aep-2024
     for (i = 16; i <= 64; i++) {
@@ -88,7 +88,7 @@ void desenharMoldura() {
     gotoxy(15, 18); printf("|");
     gotoxy(65, 18); printf("|");
 
-    setColor(15); // 15 | Branco
+    setColor(15);
 }
 
 //Checa a senha
@@ -115,7 +115,7 @@ bool verificaSenha(const char *senha) {
         }
     }
 
-    // Valida se tudo estiver verdadeiro
+    // Valida se tudo se estiver verdadeiro
     return v1 && v2 && v3 && v4 && v5;
 }
 
@@ -186,7 +186,7 @@ void inserirUsuario() {
     }
 
     // Insere o usuario e senha (CRIPTOGRAFADOS) no arquivo
-    fprintf(arquivo, "%s %s\n", usuario, senha);
+    fprintf(arquivo, "Usuário: %s | Senha: %s\n", usuario, senha);
     fclose(arquivo);
     setColor(10);
     gotoxy(18, 14);
@@ -386,18 +386,18 @@ void exibirMenu() {
                     break;
             }
         }
-        
+        // Seta pra cima = 72 | Seta pra baixo = 80 | Enter = 13
         tecla = getch();
         if (tecla == 224) {
             tecla = getch();
-            if (tecla == 72) { // Seta pra cima
+            if (tecla == 72) { 
                 opcao--;
                 if (opcao < 0) opcao = 4;
-            } else if (tecla == 80) { // Seta pra baixo
+            } else if (tecla == 80) { 
                 opcao++;
                 if (opcao > 4) opcao = 0;
             }
-        } else if (tecla == 13) { // Enter
+        } else if (tecla == 13) { 
             switch (opcao) {
                 case 0:
                     inserirUsuario();

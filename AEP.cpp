@@ -93,12 +93,13 @@ void desenharMoldura() {
 
 //Checa a senha
 bool verificaSenha(const char *senha) {
-    bool v1 = false, v2 = false, v3 = false, v4 = false, v5 = false;
+    bool v1,v2,v3,v4,v5;
+	v1=v2=v3=v4=v5 = false;
     int tamanho = 0;
 
     tamanho = strlen(senha);
 
-    // Verifica a quantidade de caracteres
+    // Verifica o tamanho
     if (tamanho >= 8 && tamanho <= 12) v1 = true;
 
     // Faz todas as verificações duma vez
@@ -114,7 +115,7 @@ bool verificaSenha(const char *senha) {
         }
     }
 
-    // Faz conjunção (Se todas as verificações são verdadeiras ele retorna true)
+    // Valida se tudo estiver verdadeiro
     return v1 && v2 && v3 && v4 && v5;
 }
 

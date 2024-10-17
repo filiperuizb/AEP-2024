@@ -9,7 +9,7 @@
 #define MAX 100
 
 
-//CriaÁ„o das funÁıes ---> 
+//Cria√ß√£o das fun√ß√µes ---> 
 void tiraCursor();
 void criptografia(char *senha);
 void gotoxy(int x, int y);
@@ -32,7 +32,7 @@ int main() {
 }
 
 /*-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
--> FunÁ„o pra tirar o cursor que aparece l· em baixo pra digitar no menu principal */
+-> Fun√ß√£o pra tirar o cursor que aparece l√° em baixo pra digitar no menu principal */
 
 void tiraCursor() {
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -42,7 +42,6 @@ void tiraCursor() {
     SetConsoleCursorInfo(hConsole, &cursorInfo); 
 }
 /*-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-
 
 -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 -> Criptografia | Foi usado ponteiro pra apontar direto pro primeiro caracter sem precisar declarar diferente do array */
@@ -143,7 +142,7 @@ bool verificaSenha(const char *senha) {
     // Verifica o tamanho
     if (tamanho >= 8 && tamanho <= 12) v1 = true;
 
-    // Faz todas as verificaÁıes duma vez
+    // Faz todas as verifica√ß√µes duma vez
     for (int i = 0; i < tamanho; i++) {
         if (senha[i] >= 'a' && senha[i] <= 'z') v2 = true;
         if (senha[i] >= 'A' && senha[i] <= 'Z') v3 = true;
@@ -162,7 +161,7 @@ bool verificaSenha(const char *senha) {
 /*-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
--> Menu - Inserir usu·rio */
+-> Menu - Inserir usu√°rio */
 
 void inserirUsuario() {
     char usuario[MAX], senha[MAX];
@@ -176,7 +175,7 @@ void inserirUsuario() {
 
     setColor(15);
 	gotoxy(18, 7);
-    printf("Digite o usu·rio: ");
+    printf("Digite o usu√°rio: ");
     scanf("%s", usuario);
 
    
@@ -190,13 +189,13 @@ void inserirUsuario() {
             break; 
         } else {
             gotoxy(18, 10);
-            printf("Senha inv·lida!\n");
+            printf("Senha inv√°lida!\n");
             gotoxy(18, 11);
             printf("-> 8 a 12 caracteres\n");
             gotoxy(18, 12);
-            printf("-> Deve ter mai˙scula, min˙scula\n");
+            printf("-> Deve ter mai√∫scula, min√∫scula\n");
             gotoxy(18, 13);
-            printf("-> Deve ter n˙mero\n");
+            printf("-> Deve ter n√∫mero\n");
             gotoxy(18, 14);
             printf("-> Deve ter caractere especial\n");
             gotoxy(18, 15);
@@ -204,7 +203,7 @@ void inserirUsuario() {
 
             getch(); 
             
-            //Printf vazio pra limpar as linhas que mostrava as informaÁıes da senha
+            //Printf vazio pra limpar as linhas que mostrava as informa√ß√µes da senha
             gotoxy(18, 10);
             printf("                                               "); 
             gotoxy(18, 11);
@@ -233,11 +232,11 @@ void inserirUsuario() {
     }
 
     // Insere o usuario e senha (CRIPTOGRAFADOS) no arquivo
-    fprintf(arquivo, "Usu·rio: %s | Senha: %s\n", usuario, senha);
+    fprintf(arquivo, "Usu√°rio: %s | Senha: %s\n", usuario, senha);
     fclose(arquivo);
     setColor(10);
     gotoxy(18, 14);
-    printf("Usu·rio inserido!\n");
+    printf("Usu√°rio inserido!\n");
 
     gotoxy(18, 16);
     printf("Para voltar, pressione qualquer tecla");
@@ -246,7 +245,7 @@ void inserirUsuario() {
 /*-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
--> Menu - lista de usu·rios criptografados */
+-> Menu - lista de usu√°rios criptografados */
 
 void verLista() {
     char linha[MAX];
@@ -256,7 +255,7 @@ void verLista() {
     desenharMoldura(); 
     setColor(9);
     gotoxy(28, 5);
-    printf("-> LISTA DE USU¡RIOS <-");
+    printf("-> LISTA DE USU√ÅRIOS <-");
     
     
 	setColor(15);
@@ -264,13 +263,13 @@ void verLista() {
     if (arquivo == NULL) {
     	setColor(12);
         gotoxy(18, 7);
-        printf("Nenhum usu·rio encontrado!\n");
+        printf("Nenhum usu√°rio encontrado!\n");
         getch();
         return;
     }
 
     gotoxy(18, 7);
-    printf("Usu·rios criptografados:\n");
+    printf("Usu√°rios criptografados:\n");
     int linha_y = 8; 
     while (fgets(linha, MAX, arquivo) != NULL) {
         gotoxy(18, linha_y++);
@@ -301,7 +300,7 @@ void removerUsuario() {
 
 	setColor(15);
     gotoxy(18, 7);
-    printf("Digite o usu·rio a ser removido: ");
+    printf("Digite o usu√°rio a ser removido: ");
     scanf("%s", usuario);
     criptografia(usuario);
 
@@ -331,10 +330,10 @@ void removerUsuario() {
     gotoxy(18, 9);
     if (encontrado) {
     	setColor(10);
-        printf("Usu·rio removido!\n");
+        printf("Usu√°rio removido!\n");
     } else {
     	setColor(12);
-        printf("Usu·rio n„o encontrado!\n");
+        printf("Usu√°rio n√£o encontrado!\n");
     }
 
     gotoxy(18, 11);
@@ -342,7 +341,7 @@ void removerUsuario() {
     getch(); 
 }
 
-//Efeito pra parecer que o computador est· digitando
+//Efeito pra parecer que o computador est√° digitando
 void efeitoDigitacao(const char *texto) {
     while (*texto) {
         printf("%c", *texto);
@@ -353,7 +352,7 @@ void efeitoDigitacao(const char *texto) {
 /*-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
--> Menu de informaÁıes */
+-> Menu de informa√ß√µes */
 
 void exibirInformacoes() {
     system("cls");
@@ -397,7 +396,7 @@ void exibirInformacoes() {
     
     setColor(7);
     gotoxy(18, 14);
-    efeitoDigitacao("Obrigado por chegar atÈ aqui e ate uma prÛxima");
+    efeitoDigitacao("Obrigado por chegar at√© aqui e ate uma pr√≥xima");
     Sleep(500);
     
 
@@ -452,7 +451,7 @@ void exibirMenu() {
                     printf(" Ver lista");
                     break;
                 case 3:
-                    printf(" InformaÁıes");
+                    printf(" Informa√ß√µes");
                     break;
                 case 4:
                     printf(" Sair");

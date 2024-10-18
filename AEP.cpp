@@ -11,15 +11,16 @@
 
 //Criação das funções ---> 
 void tiraCursor();
-void criptografia(char *senha);
+void inverterSenha(char senha[20]);
+void criptografia(char senha[20]);
 void gotoxy(int x, int y);
 void setColor(int color);
 void desenharMoldura();
-bool verificaSenha(const char *senha);
+bool verificaSenha(const char senha[20]);
 void inserirUsuario();
 void verLista();
 void removerUsuario();
-void efeitoDigitacao(const char *texto);
+void efeitoDigitacao(const char texto[100]);
 void exibirInformacoes();
 void exibirMenu();
 
@@ -45,11 +46,26 @@ void tiraCursor() {
 
 -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 -> Criptografia | Foi usado ponteiro pra apontar direto pro primeiro caracter sem precisar declarar diferente do array */
-
-void criptografia(char *senha) {
-    while (*senha) {
-        *senha += 7; 
-        senha++;
+void inverterSenha(char senha[20]) {
+  int comeco = 0;
+  int tamanho = strlen(senha)-1;
+	
+  while(comeco < tamanho) {
+    char temp = senha[comeco];
+    senha[comeco] = senha[tamanho];
+    senha[tamanho] = temp;
+    comeco++;
+    tamanho--;
+  }
+}
+void criptografia(char senha[20]) {
+    inverterSenha(senha);
+    int i = 0;
+    int soma = 0;
+    while (senha[i]) {
+      senha[i] += soma; 
+      i++;
+      soma++;
     }
 }
 /*-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
@@ -132,7 +148,7 @@ void desenharMoldura() {
 -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 -> Checa a senha */
 
-bool verificaSenha(const char *senha) {
+bool verificaSenha(const char senha[20]) {
     bool v1,v2,v3,v4,v5;
 	v1=v2=v3=v4=v5 = false;
     int tamanho = 0;
@@ -176,7 +192,7 @@ void inserirUsuario() {
     setColor(15);
 	gotoxy(18, 7);
     printf("Digite o usuário: ");
-    scanf("%s", usuario);
+    gets(usuario);
 
    
     while (true) {
@@ -282,7 +298,7 @@ void verLista() {
 
     fclose(arquivo);
     setColor(12);
-    gotoxy(18, linha_y + 2);
+    gotoxy(18, 19);
     printf("Para voltar, pressione qualquer tecla");
     getch(); 
 }
@@ -346,7 +362,7 @@ void removerUsuario() {
 }
 
 //Efeito pra parecer que o computador está digitando
-void efeitoDigitacao(const char *texto) {
+void efeitoDigitacao(const char texto[100]) {
     while (*texto) {
         printf("%c", *texto);
         Sleep(50); 
@@ -438,7 +454,7 @@ void exibirMenu() {
         for(int i = 0; i < 5; i++) {
             gotoxy(22, 8 + i);
             if(opcao == i) {
-                setColor(769);
+                setColor(9);
                 printf(">");
             } else {
                 setColor(15);

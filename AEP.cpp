@@ -9,12 +9,13 @@
 #define MAX 100
 
 
-//Cria√ß√£o das fun√ß√µes ---> 
+//CriaÁ„o das funÁıes ---> 
 void tiraCursor();
 void inverterSenha(char senha[20]);
 void criptografia(char senha[20]);
 void gotoxy(int x, int y);
 void setColor(int color);
+int efeitoRainbow(int cor);
 void desenharMoldura();
 bool verificaSenha(const char senha[20]);
 void inserirUsuario();
@@ -33,7 +34,7 @@ int main() {
 }
 
 /*-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
--> Fun√ß√£o pra tirar o cursor que aparece l√° em baixo pra digitar no menu principal */
+-> FunÁ„o pra tirar o cursor que aparece l· em baixo pra digitar no menu principal */
 
 void tiraCursor() {
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -98,7 +99,7 @@ void setColor(int color) {
 	6	Amarelo
 	7	Branco claro
 	8	Cinza
-	9	Azul claro
+	9	Azul claro  
 	10	Verde claro
 	11	Azul piscina
 	12	Vermelho claro
@@ -107,42 +108,67 @@ void setColor(int color) {
 	15	Branco
 	*/
 }
+/* -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+-> Efeito rainbow */
+
+int efeitoRainbow(int cor) {
+	cor = (cor % 15) + 1;
+	return cor;
+}
 /*-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 -> Faz a moldura em volta do Menu */
 
 void desenharMoldura() {
-    int i;
-
-    setColor(12); 
-
-   // Aep-2024
-    for (i = 16; i <= 64; i++) {
-        gotoxy(i, 2); printf("_");
-    }
-    gotoxy(35, 2); printf("AEP - 2024");
-
-    // Retas
-    for (i = 16; i <= 64; i++) {
-        gotoxy(i, 3); printf("_");
-        gotoxy(i, 18); printf("_");
-    }
-
-    // Verticais
-    for (i = 4; i < 18; i++) {
-        gotoxy(15, i); printf("|");
-        gotoxy(65, i); printf("|");
-    }
-
-	//Cantos
-    gotoxy(15, 3); printf("|");
-    gotoxy(65, 3); printf("|");
-    gotoxy(15, 18); printf("|");
-    gotoxy(65, 18); printf("|");
-
-    setColor(15);
+	int infinito = 0;
+	int cor = 1;
+	
+		
+		int i;
+		setColor(9);  
+	
+	    // AEP-2024
+	    for (i = 16; i <= 64; i++) {
+	        gotoxy(i, 2); 
+	        printf("_");
+	    }
+	    gotoxy(35, 2); 
+	    printf("AEP - 2024");
+	
+	    // Retas
+	    for (i = 16; i <= 64; i++) {
+	        gotoxy(i, 3); 
+	        printf("_");
+	        gotoxy(i, 18); 
+	        printf("_");
+	    }
+	
+	    // Lateral
+	    for (i = 4; i < 18; i++) {
+	        gotoxy(15, i); 
+	        printf("|");
+	        gotoxy(65, i); 
+	        printf("|");
+	    }
+	
+	    // Cantos
+	    gotoxy(15, 3); 
+	    printf("|"); 
+	    gotoxy(65, 3); 
+	    printf("|");  
+	    gotoxy(15, 18); 
+	    printf("|"); 
+	    gotoxy(65, 18); 
+	    printf("|");  
+	
+	    setColor(15);  
+			
+	
 }
+
 /* -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
@@ -155,10 +181,10 @@ bool verificaSenha(const char senha[20]) {
 
     tamanho = strlen(senha);
 
-    // Verifica o tamanho
+    
     if (tamanho >= 8 && tamanho <= 12) v1 = true;
 
-    // Faz todas as verifica√ß√µes duma vez
+    
     for (int i = 0; i < tamanho; i++) {
         if (senha[i] >= 'a' && senha[i] <= 'z') v2 = true;
         if (senha[i] >= 'A' && senha[i] <= 'Z') v3 = true;
@@ -171,13 +197,13 @@ bool verificaSenha(const char senha[20]) {
         }
     }
 
-    // Valida se tudo se estiver verdadeiro
+    
     return v1 && v2 && v3 && v4 && v5;
 }
 /*-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
--> Menu - Inserir usu√°rio */
+-> Menu - Inserir usu·rio */
 
 void inserirUsuario() {
     char usuario[MAX], senha[MAX];
@@ -185,13 +211,13 @@ void inserirUsuario() {
 
     system("cls");
     desenharMoldura(); 
-    gotoxy(28, 5);
+    gotoxy(30, 5);
     setColor(9);
     printf("-> MENU INSERIR <-");
 
     setColor(15);
 	gotoxy(18, 7);
-    printf("Digite o usu√°rio: ");
+    printf("Digite o usu·rio: ");
     gets(usuario);
 
    
@@ -205,13 +231,13 @@ void inserirUsuario() {
             break; 
         } else {
             gotoxy(18, 10);
-            printf("Senha inv√°lida!\n");
+            printf("Senha inv·lida!\n");
             gotoxy(18, 11);
             printf("-> 8 a 12 caracteres\n");
             gotoxy(18, 12);
-            printf("-> Deve ter mai√∫scula, min√∫scula\n");
+            printf("-> Deve ter mai˙scula, min˙scula\n");
             gotoxy(18, 13);
-            printf("-> Deve ter n√∫mero\n");
+            printf("-> Deve ter n˙mero\n");
             gotoxy(18, 14);
             printf("-> Deve ter caractere especial\n");
             gotoxy(18, 15);
@@ -219,7 +245,7 @@ void inserirUsuario() {
 
             getch(); 
             
-            //Printf vazio pra limpar as linhas que mostrava as informa√ß√µes da senha
+            //Printf vazio pra limpar as linhas que mostrava as informaÁıes da senha
             gotoxy(18, 10);
             printf("                                               "); 
             gotoxy(18, 11);
@@ -248,11 +274,11 @@ void inserirUsuario() {
     }
 
     // Insere o usuario e senha (CRIPTOGRAFADOS) no arquivo
-    fprintf(arquivo, "Usu√°rio: %s | Senha: %s\n", usuario, senha);
+    fprintf(arquivo, "Usu·rio: %s | Senha: %s\n", usuario, senha);
     fclose(arquivo);
     setColor(10);
     gotoxy(18, 14);
-    printf("Usu√°rio inserido!\n");
+    printf("Usu·rio inserido!\n");
 
     gotoxy(18, 16);
     printf("Para voltar, pressione qualquer tecla");
@@ -261,7 +287,7 @@ void inserirUsuario() {
 /*-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
--> Menu - lista de usu√°rios criptografados */
+-> Menu - lista de usu·rios criptografados */
 
 void verLista() {
     char linha[MAX];
@@ -270,8 +296,8 @@ void verLista() {
     system("cls");
     desenharMoldura(); 
     setColor(9);
-    gotoxy(28, 5);
-    printf("-> LISTA DE USU√ÅRIOS <-");
+    gotoxy(30, 5);
+    printf("-> LISTA DE USU¡RIOS <-");
     
     
 	setColor(15);
@@ -279,16 +305,16 @@ void verLista() {
     if (arquivo == NULL) {
     	setColor(12);
         gotoxy(18, 7);
-        printf("Nenhum usu√°rio encontrado!\n");
+        printf("Nenhum usu·rio encontrado!\n");
         getch();
         return;
     }
 
-    gotoxy(18, 7);
-    printf("Usu√°rios criptografados:\n");
+    gotoxy(29, 7);
+    printf("Usu·rios criptografados:\n");
     setColor(12);
-	gotoxy(18,8);
-    printf("_____________________________");
+	gotoxy(27,8);
+    printf("____________________________");
     setColor(15);
     int linha_y = 9; 
     while (fgets(linha, MAX, arquivo) != NULL) {
@@ -298,7 +324,7 @@ void verLista() {
 
     fclose(arquivo);
     setColor(12);
-    gotoxy(18, 19);
+    gotoxy(22, 19);
     printf("Para voltar, pressione qualquer tecla");
     getch(); 
 }
@@ -315,12 +341,12 @@ void removerUsuario() {
     system("cls");
     desenharMoldura(); 
     setColor(9);
-    gotoxy(28, 5);
+    gotoxy(30, 5);
     printf("-> MENU REMOVER <-");
 
 	setColor(15);
     gotoxy(18, 7);
-    printf("Digite o usu√°rio a ser removido: ");
+    printf("Digite o usu·rio a ser removido: ");
     scanf("%s", usuario);
     criptografia(usuario);
 
@@ -350,34 +376,40 @@ void removerUsuario() {
     gotoxy(18, 9);
     if (encontrado) {
     	setColor(10);
-        printf("Usu√°rio removido!\n");
+        printf("Usu·rio removido!\n");
     } else {
     	setColor(12);
-        printf("Usu√°rio n√£o encontrado!\n");
+        printf("Usu·rio n„o encontrado!\n");
     }
 
     gotoxy(18, 11);
     printf("Para voltar, pressione qualquer tecla");
     getch(); 
 }
-
-//Efeito pra parecer que o computador est√° digitando
+/*-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+ 
+ -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+ -> Efeito pra parecer que o computador est· digitando */
 void efeitoDigitacao(const char texto[100]) {
     while (*texto) {
         printf("%c", *texto);
-        Sleep(50); 
+        Sleep(30); 
         texto++;
     }
 }
 /*-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
--> Menu de informa√ß√µes */
+-> Menu de informaÁıes */
 
 void exibirInformacoes() {
     system("cls");
     desenharMoldura();
-    
+    int cor = 12;
+    int tecla; 
+    int teclaEnter = 13;
+    int setaBaixo = 80;
+    int setaCima = 72;
   
     setColor(12);
     gotoxy(18, 5);
@@ -385,17 +417,16 @@ void exibirInformacoes() {
     Sleep(500);
     
     setColor(9);
-    gotoxy(18, 6);
-    efeitoDigitacao("-> Filipe Ruiz Boligon");
-    Sleep(500);
-    
-    gotoxy(18, 7);
-    efeitoDigitacao("-> Joao Miguel Bonfim");
-    Sleep(500);
-    
-    gotoxy(18, 8);
-    efeitoDigitacao("-> Gabriel Henrik Da Maia");
-    Sleep(500);
+	gotoxy(18, 6);
+	setColor(9);
+	efeitoDigitacao("-> Filipe Ruiz Boligon");
+	Sleep(500);
+	gotoxy(18, 7);
+	efeitoDigitacao("-> Joao Miguel Bonfim");
+	Sleep(500);
+	gotoxy(18, 8);
+	efeitoDigitacao("-> Gabriel Henrik Da Maia");	
+	Sleep(500);
 
 	setColor(12);
     gotoxy(18, 10);
@@ -413,24 +444,40 @@ void exibirInformacoes() {
     setColor(12);
     gotoxy(18,13);
     efeitoDigitacao("---------------------------------------------");
-    
+
     setColor(7);
-    gotoxy(18, 14);
-    efeitoDigitacao("Obrigado por chegar at√© aqui e ate uma pr√≥xima");
-    Sleep(500);
+	gotoxy(18, 14);
+	efeitoDigitacao("Obrigado por chegar atÈ aqui e ate uma prÛxima");
+		
+	for(;;) {
+	    setColor(cor);
+	    gotoxy(18, 15);
+	    efeitoDigitacao("BOM DIA!!!");
+	
+		cor = efeitoRainbow(cor);
+	    if(cor == 7 || cor == 15) {
+	    	cor = efeitoRainbow(cor);
+		}	
+	    setColor(15);
+	    gotoxy(18, 17);
+	    printf("Para voltar, pressione qualquer tecla.");
+	    
+	    if(kbhit()) {
+	    	if (tecla = getch()) {
+	    		if(tecla == teclaEnter) {
+	    			break;
+				}
+			}
+		}
+		    
+	}
+	
+	setColor(15);  	
     
 
-    setColor(14);
-    gotoxy(18, 15);
-    efeitoDigitacao("BOM DIA!!!");
-
-    setColor(15);
-    gotoxy(18, 17);
-    printf("Para voltar, pressione qualquer tecla.");
     
-    setColor(15); 
-    getch(); 
 }
+	
 /*-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
@@ -440,21 +487,36 @@ void exibirMenu() {
     int opcao = 0;
     int tecla;
     bool sair = false;
-   
-	
-	do {
-        system("cls"); 
+    int cor = 1; 
+    int teclaEnter = 13;
+    int setaBaixo = 80;
+    int setaCima = 72;
+
+    system("cls"); 
+    
+
+    while (!sair) {
+        
         desenharMoldura(); 
-        setColor(9);
+        setColor(efeitoRainbow(cor));
         gotoxy(30, 5);
         printf("-> MENU PRINCIPAL <- ");
         
-        setColor(15);
+        setColor(9);
+        gotoxy(25,6);
+        printf("______________________________");
         
+        
+        
+
+        cor = efeitoRainbow(cor); 
+        Sleep(100); 
+
+        setColor(15); 
         for(int i = 0; i < 5; i++) {
-            gotoxy(22, 8 + i);
+            gotoxy(25, 8 + i); 
             if(opcao == i) {
-                setColor(9);
+                setColor(efeitoRainbow(cor));
                 printf(">");
             } else {
                 setColor(15);
@@ -471,45 +533,59 @@ void exibirMenu() {
                     printf(" Ver lista");
                     break;
                 case 3:
-                    printf(" Informa√ß√µes");
+                    printf(" InformaÁıes");
                     break;
                 case 4:
                     printf(" Sair");
                     break;
             }
         }
+		
+		setColor(9);
+		gotoxy(25,14);
+        printf("______________________________");
         
-        // Seta pra cima = 72 | Seta pra baixo = 80 | Enter = 13
-        tecla = getch();
-        if (tecla == 224) {
+        if (kbhit()) { 
             tecla = getch();
-            if (tecla == 72) { 
-                opcao--;
-                if (opcao < 0) opcao = 4;
-            } else if (tecla == 80) { 
-                opcao++;
-                if (opcao > 4) opcao = 0;
-            }
-        } else if (tecla == 13) { 
-            switch (opcao) {
-                case 0:
-                    inserirUsuario();
-                    break;
-                case 1:
-                    removerUsuario();
-                    break;
-                case 2:
-                    verLista();
-                    break;
-                case 3:
-                    exibirInformacoes();
-                    break;
-                case 4:
-                    sair = true;
-                    break;;
+            if (tecla == 224) {
+                tecla = getch();
+                if (tecla == setaCima) { 
+                    opcao--;
+                    if (opcao < 0) opcao = 4;
+                } else if (tecla == setaBaixo) { 
+                    opcao++;
+                    if (opcao > 4) opcao = 0;
+                }
+            } else if (tecla == teclaEnter) { 
+                switch (opcao) {
+                    case 0:
+                        inserirUsuario();
+                        system("cls");
+                        desenharMoldura();
+                        break;
+                    case 1:
+                        removerUsuario();
+                        system("cls");
+                        desenharMoldura();
+                        break;
+                    case 2:
+                        verLista();
+                        system("cls");
+                        desenharMoldura();
+                        break;
+                    case 3:
+                        exibirInformacoes();
+                        system("cls");
+                        desenharMoldura();
+                        break;
+                    case 4:
+                        sair = true;
+                        break;
+                }
             }
         }
-    } while (!sair);
+    }
 }
+
 /*-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 fim; */

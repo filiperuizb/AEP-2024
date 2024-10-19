@@ -13,17 +13,20 @@ Este projeto consiste em um mini menu que permite a inserção e remoção de us
 Após a validação, a senha é criptografada salva no arquivo `usuarios.txt`. O menu também permite remover um usuário apenas digitando o nome de usuário e exibe a lista dos cadastrados no arquivo de texto.
 
 ## Como funciona a CRIPTOGRAFIA?
-- Primeiro tanto usuario quanto senha são invertidos (filipe viraria epilif);
-- Após isso ele é adicionado a um laço de repetição que faz o incremento de 3 caracter seguindo a tabela ASCII;
+- Primeiro tanto usuario quanto senha são invertidos (`filipe viraria epilif`);
+- Após isso ele é adicionado a um laço de repetição que faz o incremento de 3 caracter seguindo a tabela `ASCII`;
 - Após percorrer um laço ele sempre incrementará 1 seguindo a tabela;
+
 Adicionalmente, foi implementado um menu para exibir informações sobre o projeto, inspirado pela brilhante ideia do professor Alexandre Moreno. Nesse menu, incluímos os integrantes do grupo e as bibliotecas utilizadas.
 
 ## Mensagem Final
 
 Esse projeto foi um desafio difícil, pois me fez sair da minha zona de conforto e pensar criticamente. Muitas das soluções não foram abordadas em aula, o que exigiu pesquisa e iniciativa. No geral, consegui aplicar um design que achei bonito e fiz um bom trabalho. Agradeço mais uma vez ao professor Alexandre Moreno e ao João Ferlini, que nos orientaram durante o processo!
 
+
 ## Foi utilizada a Linguagem C e C++ para utilizar expressões booleanas 
 [![Linguagens utilizadas](https://i.imgur.com/dOlFp16.png)](https://youtu.be/DTY5xVDRnqI)
+
 
 ## Acesse o vídeo da amostra do projeto, basta clicar na imagem!
 [![Video](https://i.imgur.com/JkdzOxY.png)](https://youtu.be/DTY5xVDRnqI)

@@ -17,7 +17,7 @@ void gotoxy(int x, int y);
 void setColor(int color);
 int efeitoRainbow(int cor);
 void desenharMoldura();
-bool verificaSenha(const char senha[20]);
+bool verificaSenha(char senha[20]);
 void inserirUsuario();
 void verLista();
 void removerUsuario();
@@ -174,7 +174,7 @@ void desenharMoldura() {
 -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 -> Checa a senha */
 
-bool verificaSenha(const char senha[20]) {
+bool verificaSenha(char senha[20]) {
     bool v1,v2,v3,v4,v5;
 	v1=v2=v3=v4=v5 = false;
     int tamanho = 0;
@@ -225,7 +225,7 @@ void inserirUsuario() {
     	setColor(15);
         gotoxy(18, 8);
         printf("Digite a senha: ");
-        scanf("%s", senha);
+        gets(senha);
 
         if (verificaSenha(senha)) {
             break; 
@@ -244,10 +244,12 @@ void inserirUsuario() {
             printf("-> Para tentar novamente, aperte Enter!");
 
             getch(); 
-            
+                        
             //Printf vazio pra limpar as linhas que mostrava as informações da senha
+            gotoxy(18,8);
+            printf("                       ");
             gotoxy(18, 10);
-            printf("                                               "); 
+            printf(" "); 
             gotoxy(18, 11);
             printf("                                               ");
             gotoxy(18, 12);

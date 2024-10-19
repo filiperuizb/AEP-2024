@@ -24,3 +24,5 @@ Esse projeto foi um desafio difícil, pois me fez sair da minha zona de conforto
 
 
 ![Linguagens utilizadas](https://i.imgur.com/Vv3uyAB.png)
+
+![Amostra](https://youtu.be/DTY5xVDRnqI)

@@ -24,7 +24,7 @@ Adicionalmente, foi implementado um menu para exibir informações sobre o proje
 Esse projeto foi um desafio difícil, pois me fez sair da minha zona de conforto e pensar criticamente. Muitas das soluções não foram abordadas em aula, o que exigiu pesquisa e iniciativa. No geral, consegui aplicar um design que achei bonito e fiz um bom trabalho. Agradeço mais uma vez ao professor Alexandre Moreno e ao João Ferlini, que nos orientaram durante o processo!
 
 
-## Foi utilizada a Linguagem C e C++ para utilizar expressões booleanas 
+## Foi utilizada a Linguagem C no Projeto!
 [![Linguagens utilizadas](https://i.imgur.com/zd6KOy3.png)](https://youtu.be/DTY5xVDRnqI)
 
 

@@ -28,7 +28,7 @@ Esse projeto foi um desafio difícil, pois me fez sair da minha zona de conforto
 [![Linguagens utilizadas](https://i.imgur.com/dOlFp16.png)](https://youtu.be/DTY5xVDRnqI)
 
 
-## Acesse o vídeo da amostra do projeto, basta clicar na imagem!
+##       Acesse o vídeo da amostra do projeto, basta clicar na imagem!
 [![Video](https://i.imgur.com/JkdzOxY.png)](https://youtu.be/DTY5xVDRnqI)
 
 

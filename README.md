@@ -21,3 +21,6 @@ Adicionalmente, foi implementado um menu para exibir informações sobre o proje
 ## Mensagem Final
 
 Esse projeto foi um desafio difícil, pois me fez sair da minha zona de conforto e pensar criticamente. Muitas das soluções não foram abordadas em aula, o que exigiu pesquisa e iniciativa. No geral, consegui aplicar um design que achei bonito e fiz um bom trabalho. Agradeço mais uma vez ao professor Alexandre Moreno e ao João Ferlini, que nos orientaram durante o processo!
+
+
+![Linguagens utilizadas](https://i.imgur.com/Vv3uyAB.png)

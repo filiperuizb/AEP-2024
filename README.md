@@ -25,10 +25,10 @@ Esse projeto foi um desafio difícil, pois me fez sair da minha zona de conforto
 
 
 ## Foi utilizada a Linguagem C e C++ para utilizar expressões booleanas 
-[![Linguagens utilizadas](https://i.imgur.com/dOlFp16.png)](https://youtu.be/DTY5xVDRnqI)
+[![Linguagens utilizadas](https://i.imgur.com/zd6KOy3.png)](https://youtu.be/DTY5xVDRnqI)
 
 
 ##       Acesse o vídeo da amostra do projeto, basta clicar na imagem!
-[![Video](https://i.imgur.com/JkdzOxY.png)](https://youtu.be/DTY5xVDRnqI)
+[![Video](https://i.imgur.com/kj5Y1YK.png)](https://youtu.be/DTY5xVDRnqI)
 
 

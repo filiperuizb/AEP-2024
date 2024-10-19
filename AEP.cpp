@@ -249,7 +249,7 @@ void inserirUsuario() {
             gotoxy(18,8);
             printf("                       ");
             gotoxy(18, 10);
-            printf(" "); 
+            printf("                                               "); 
             gotoxy(18, 11);
             printf("                                               ");
             gotoxy(18, 12);
@@ -263,11 +263,11 @@ void inserirUsuario() {
         }
     }
 
-	//Faz a criptografia do usuario e senha inserido
+
     criptografia(usuario);
     criptografia(senha);
 
-    // Abre o arquivo txt
+
     arquivo = fopen("usuarios.txt", "a");
     if (arquivo == NULL) {
         gotoxy(18, 14);
@@ -275,7 +275,6 @@ void inserirUsuario() {
         return;
     }
 
-    // Insere o usuario e senha (CRIPTOGRAFADOS) no arquivo
     fprintf(arquivo, "Usuário: %s | Senha: %s\n", usuario, senha);
     fclose(arquivo);
     setColor(10);

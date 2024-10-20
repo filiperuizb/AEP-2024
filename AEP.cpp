@@ -9,7 +9,7 @@
 #define MAX 100
 
 
-//Criação das funções ---> 
+
 void tiraCursor();
 void inverterSenha(char senha[20]);
 void criptografia(char senha[20]);
@@ -21,7 +21,8 @@ bool verificaSenha(char senha[20]);
 void inserirUsuario();
 void verLista();
 void removerUsuario();
-void efeitoDigitacao(const char texto[100]);
+void efeitoDigitacao(const char texto[100]); 
+void efeitoDigitacaoSEMCOR(const char texto[100]);
 void exibirInformacoes();
 void exibirMenu();
 
@@ -46,7 +47,7 @@ void tiraCursor() {
 /*-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
--> Criptografia | Foi usado ponteiro pra apontar direto pro primeiro caracter sem precisar declarar diferente do array */
+-> Criptografia */
 void inverterSenha(char senha[20]) {
   int comeco = 0;
   int tamanho = strlen(senha)-1;
@@ -245,9 +246,9 @@ void inserirUsuario() {
 
             getch(); 
                         
-            //Printf vazio pra limpar as linhas que mostrava as informações da senha
+            // Limpar informações
             gotoxy(18,8);
-            printf("                       ");
+            printf("                                              ");
             gotoxy(18, 10);
             printf("                                               "); 
             gotoxy(18, 11);
@@ -317,9 +318,9 @@ void verLista() {
 	gotoxy(27,8);
     printf("____________________________");
     setColor(15);
-    int linha_y = 9; 
+    int linhaY = 9; 
     while (fgets(linha, MAX, arquivo) != NULL) {
-        gotoxy(18, linha_y++);
+        gotoxy(25, linhaY++);
         printf("%s", linha);
     }
 
@@ -392,10 +393,26 @@ void removerUsuario() {
  -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
  -> Efeito pra parecer que o computador está digitando */
 void efeitoDigitacao(const char texto[100]) {
-    while (*texto) {
-        printf("%c", *texto);
+    int i = 0;
+    int cor = 1;
+    while (texto[i] != '\0') {
+        setColor(cor);
+		printf("%c", texto[i]);
         Sleep(30); 
-        texto++;
+        i++;
+        cor = efeitoRainbow(cor);
+        
+    }
+}
+void efeitoDigitacaoSEMCOR(const char texto[100]) {
+    int i = 0;
+    while (texto[i] != '\0') {
+        
+		printf("%c", texto[i]);
+        Sleep(30); 
+        i++;
+        
+        
     }
 }
 /*-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
@@ -412,26 +429,26 @@ void exibirInformacoes() {
     int setaBaixo = 80;
     int setaCima = 72;
   
-    setColor(12);
+    setColor(9);
     gotoxy(18, 5);
-    efeitoDigitacao("Feito por:");
+    efeitoDigitacaoSEMCOR("Feito por:");
     Sleep(500);
     
-    setColor(9);
-	gotoxy(18, 6);
+    
+	gotoxy(20, 6);
 	setColor(9);
 	efeitoDigitacao("-> Filipe Ruiz Boligon");
 	Sleep(500);
-	gotoxy(18, 7);
+	gotoxy(20, 7);
 	efeitoDigitacao("-> Joao Miguel Bonfim");
 	Sleep(500);
-	gotoxy(18, 8);
+	gotoxy(20, 8);
 	efeitoDigitacao("-> Gabriel Henrik Da Maia");	
 	Sleep(500);
 
-	setColor(12);
+	setColor(9);
     gotoxy(18, 10);
-    efeitoDigitacao("------------ Bibliotecas usadas ------------ ");
+    efeitoDigitacaoSEMCOR("------------ Bibliotecas usadas ------------ ");
     Sleep(500);
     
     setColor(9);
@@ -442,18 +459,17 @@ void exibirInformacoes() {
     efeitoDigitacao("conio.h, locale.h, stdbool.h, string.h.");
     Sleep(500);
     
-    setColor(12);
+    setColor(9);
     gotoxy(18,13);
-    efeitoDigitacao("---------------------------------------------");
-
-    setColor(7);
+    efeitoDigitacaoSEMCOR("---------------------------------------------");
+    
 	gotoxy(18, 14);
 	efeitoDigitacao("Obrigado por chegar até aqui e ate uma próxima");
 		
 	for(;;) {
 	    setColor(cor);
 	    gotoxy(18, 15);
-	    efeitoDigitacao("BOM DIA!!!");
+	    efeitoDigitacaoSEMCOR("BOM DIA!!!");
 	
 		cor = efeitoRainbow(cor);
 	    if(cor == 7 || cor == 15) {
@@ -472,11 +488,7 @@ void exibirInformacoes() {
 		}
 		    
 	}
-	
 	setColor(15);  	
-    
-
-    
 }
 	
 /*-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
@@ -511,7 +523,7 @@ void exibirMenu() {
         
 
         cor = efeitoRainbow(cor); 
-        Sleep(100); 
+        Sleep(80); 
 
         setColor(15); 
         for(int i = 0; i < 5; i++) {

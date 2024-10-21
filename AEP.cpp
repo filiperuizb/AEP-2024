@@ -5,6 +5,7 @@
 #include <locale.h>
 #include <stdbool.h>
 #include <string.h>
+#include <time.h>
 
 #define MAX 100
 
@@ -12,6 +13,7 @@
 
 void tiraCursor();
 void inverterSenha(char senha[20]);
+void converteVogal(char senha[20]);
 void criptografia(char senha[20]);
 void gotoxy(int x, int y);
 void setColor(int color);
@@ -28,8 +30,9 @@ void exibirMenu();
 
 // PRINCIPAL ------>
 int main() {
-    setlocale(LC_ALL, "Portuguese");
-    tiraCursor();
+    setlocale(LC_CTYPE, "Portuguese");
+    srand(time(NULL));
+		tiraCursor();
     exibirMenu();
     return 0;
 }
@@ -50,7 +53,7 @@ void tiraCursor() {
 -> Criptografia */
 void inverterSenha(char senha[20]) {
   int comeco = 0;
-  int tamanho = strlen(senha)-1;
+  int tamanho = strlen(senha) - 1;
 	
   while(comeco < tamanho) {
     char temp = senha[comeco];
@@ -60,14 +63,28 @@ void inverterSenha(char senha[20]) {
     tamanho--;
   }
 }
+
+void converteVogal(char senha[20]) {
+	inverterSenha(senha);
+	srand(time(0));  
+	int tamanho = strlen(senha);
+	int i;
+	for(i = 0; i < tamanho; i++) {
+		if(senha[i] == 'a' || senha[i] == 'e' || senha[i] == 'i' || senha[i] == 'o' || senha[i] == 'u' ||
+		   senha[i] == 'A' || senha[i] == 'E' || senha[i] == 'I' || senha[i] == 'O' || senha[i] == 'U') {
+			int incrementoVogal = rand() % (126 - senha[i]);
+			senha[i] += incrementoVogal;	
+		}
+	}
+}
+
 void criptografia(char senha[20]) {
-    inverterSenha(senha);
+    converteVogal(senha);
     int i = 0;
-    int soma = 0;
     while (senha[i]) {
-      senha[i] += soma; 
-      i++;
-      soma++;
+        int incremento = rand() % (126 - senha[i]); 
+        senha[i] += incremento; 
+        i++;
     }
 }
 /*-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
@@ -320,7 +337,7 @@ void verLista() {
     setColor(15);
     int linhaY = 9; 
     while (fgets(linha, MAX, arquivo) != NULL) {
-        gotoxy(25, linhaY++);
+        gotoxy(24, linhaY++);
         printf("%s", linha);
     }
 
@@ -352,7 +369,7 @@ void removerUsuario() {
     scanf("%s", usuario);
     criptografia(usuario);
 
-    // Abrindo arquivo usuarios 
+   
     arquivo = fopen("usuarios.txt", "r");
     temp = fopen("temp.txt", "w");
     if (arquivo == NULL || temp == NULL) {
@@ -456,7 +473,7 @@ void exibirInformacoes() {
 	efeitoDigitacao("stdio.h, stdlib.h, windows.h");
 	    
     gotoxy(18, 12);
-    efeitoDigitacao("conio.h, locale.h, stdbool.h, string.h.");
+    efeitoDigitacao("conio.h, time.h, locale.h, stdbool.h, string.h.");
     Sleep(500);
     
     setColor(9);
@@ -464,7 +481,8 @@ void exibirInformacoes() {
     efeitoDigitacaoSEMCOR("---------------------------------------------");
     
 	gotoxy(18, 14);
-	efeitoDigitacao("Obrigado por chegar até aqui e ate uma próxima");
+	setColor(14);
+	efeitoDigitacaoSEMCOR("Obrigado por chegar até aqui e ate uma próxima");
 		
 	for(;;) {
 	    setColor(cor);

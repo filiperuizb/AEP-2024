@@ -14,8 +14,9 @@ Após a validação, a senha é criptografada salva no arquivo `usuarios.txt`. O
 
 ## Como funciona a CRIPTOGRAFIA?
 - Primeiro tanto usuario quanto senha são invertidos (`filipe viraria epilif`);
-- Após isso ele é adicionado a um laço de repetição que faz o incremento de 3 caracter seguindo a tabela `ASCII`;
-- Após percorrer um laço ele sempre incrementará 1 seguindo a tabela;
+- Após isso, uma função que verifica vogais é acionada e ela troca a vogal gerando um valor aleatório entre 1 e 26 na tabela ASCII;
+- Após isso ele é adicionado a um laço de repetição que faz o incremento de um valor aleatório seguindo a tabela `ASCII`.
+
 
 Adicionalmente, foi implementado um menu para exibir informações sobre o projeto, inspirado pela brilhante ideia do professor Alexandre Moreno. Nesse menu, incluímos os integrantes do grupo e as bibliotecas utilizadas.
 

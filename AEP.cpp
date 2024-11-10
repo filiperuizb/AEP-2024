@@ -15,6 +15,8 @@ void tiraCursor();
 void inverterSenha(char senha[20]);
 void converteVogal(char senha[20]);
 void criptografia(char senha[20]);
+void reverteVogal(char senha[20]);
+void descriptografia(char senha[20]);
 void gotoxy(int x, int y);
 void setColor(int color);
 int efeitoRainbow(int cor);
@@ -72,8 +74,9 @@ void converteVogal(char senha[20]) {
 	for(i = 0; i < tamanho; i++) {
 		if(senha[i] == 'a' || senha[i] == 'e' || senha[i] == 'i' || senha[i] == 'o' || senha[i] == 'u' ||
 		   senha[i] == 'A' || senha[i] == 'E' || senha[i] == 'I' || senha[i] == 'O' || senha[i] == 'U') {
-			int incrementoVogal = rand() % (126 - senha[i]);
+			int incrementoVogal = 2;
 			senha[i] += incrementoVogal;	
+			incrementoVogal++;
 		}
 	}
 }
@@ -82,10 +85,41 @@ void criptografia(char senha[20]) {
     converteVogal(senha);
     int i = 0;
     while (senha[i]) {
-        int incremento = rand() % (126 - senha[i]); 
+        int incremento = 5;
         senha[i] += incremento; 
         i++;
+        incremento++;
     }
+}
+/*-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+-> Descriptografia*/
+
+void reverteVogal(char senha[20]) {
+	int tamanho = strlen(senha);
+	int i;
+	int decrementoVogal = 2;
+	
+	for(i = 0; i < tamanho; i++) {
+		if(senha[i] == 'c' || senha[i] == 'g' || senha[i] == 'k' || senha[i] == 'q' || senha[i] == 'w' ||
+		   senha[i] == 'C' || senha[i] == 'G' || senha[i] == 'K' || senha[i] == 'Q' || senha[i] == 'W') {
+			senha[i] -= decrementoVogal;
+			decrementoVogal++;
+		}
+	}
+	inverterSenha(senha);
+}
+
+void descriptografia(char senha[20]) {
+    int i = 0;
+    int decremento = 5;
+
+    while (senha[i]) {
+        senha[i] -= decremento;
+        i++;
+        decremento++;
+    }
+  
+    reverteVogal(senha);
 }
 /*-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
@@ -358,20 +392,20 @@ void removerUsuario() {
     int encontrado = 0;
 
     system("cls");
-    desenharMoldura(); 
+    desenharMoldura();
     setColor(9);
     gotoxy(30, 5);
     printf("-> MENU REMOVER <-");
 
-	setColor(15);
+    setColor(15);
     gotoxy(18, 7);
     printf("Digite o usuário a ser removido: ");
     scanf("%s", usuario);
-    criptografia(usuario);
-
-   
+ 		criptografia(usuario);
+ 		
     arquivo = fopen("usuarios.txt", "r");
     temp = fopen("temp.txt", "w");
+
     if (arquivo == NULL || temp == NULL) {
         gotoxy(18, 9);
         printf("Erro ao abrir os arquivos!\n");
@@ -379,6 +413,7 @@ void removerUsuario() {
     }
 
     while (fgets(linha, MAX, arquivo) != NULL) {
+        // Comparar com o usuário, sem criptografá-lo novamente
         if (strstr(linha, usuario) == NULL) {
             fputs(linha, temp);
         } else {
@@ -394,16 +429,16 @@ void removerUsuario() {
 
     gotoxy(18, 9);
     if (encontrado) {
-    	setColor(10);
+        setColor(10);
         printf("Usuário removido!\n");
     } else {
-    	setColor(12);
+        setColor(12);
         printf("Usuário não encontrado!\n");
     }
 
     gotoxy(18, 11);
     printf("Para voltar, pressione qualquer tecla");
-    getch(); 
+    getch();
 }
 /*-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
  

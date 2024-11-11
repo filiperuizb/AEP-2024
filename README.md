@@ -2,6 +2,11 @@
 
 ## Sobre o projeto
 
+# Diagrama de Caso de Uso 
+![Diagrama de Caso de Uso](DiagramaDeCasoDeUso.png)
+
+
+
 Este projeto consiste em um mini menu que permite a inserção e remoção de usuários e senhas, com as seguintes verificações de segurança para a senha:
 
 - 8 a 12 caracteres;
@@ -14,8 +19,8 @@ Após a validação, a senha é criptografada salva no arquivo `usuarios.txt`. O
 
 ## Como funciona a CRIPTOGRAFIA?
 - Primeiro tanto usuario quanto senha são invertidos (`filipe viraria epilif`);
-- Após isso, uma função que verifica vogais é acionada e ela troca a vogal gerando um valor aleatório entre 1 e 26 na tabela ASCII;
-- Após isso ele é adicionado a um laço de repetição que faz o incremento de um valor aleatório seguindo a tabela `ASCII`.
+- Após isso, uma função que verifica vogais é acionada e ela troca a vogal incrementando o valor 2;
+- Após isso ele é adicionado a um laço de repetição que faz o incremento de 5 caracteres seguindo a tabela `ASCII`.
 
 
 Adicionalmente, foi implementado um menu para exibir informações sobre o projeto, inspirado pela brilhante ideia do professor Alexandre Moreno. Nesse menu, incluímos os integrantes do grupo e as bibliotecas utilizadas.

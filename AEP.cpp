@@ -155,7 +155,6 @@ void desenharMoldura() {
 	int i;
 	setColor(9);
 
-	// AEP-2024
 	for (i = 16; i <= 64; i++)
 	{
 		gotoxy(i, 2);
@@ -164,7 +163,6 @@ void desenharMoldura() {
 	gotoxy(35, 2);
 	printf("AEP - 2024");
 
-	// Retas
 	for (i = 16; i <= 64; i++)
 	{
 		gotoxy(i, 3);
@@ -173,7 +171,6 @@ void desenharMoldura() {
 		printf("_");
 	}
 
-	// Lateral
 	for (i = 4; i < 18; i++)
 	{
 		gotoxy(15, i);
@@ -181,8 +178,7 @@ void desenharMoldura() {
 		gotoxy(65, i);
 		printf("|");
 	}
-
-	// Cantos
+	
 	gotoxy(15, 3);
 	printf("|");
 	gotoxy(65, 3);
@@ -252,55 +248,54 @@ bool verificaUsuario(char usuario[20]) {
 -> Menu - Inserir usuário */
 
 void inserirUsuario() {
-	char usuario[100], senha[100];
-	FILE *arquivo;
+  char registro[2][100]; 
+  FILE *arquivo;
 
-	system("cls");
-	desenharMoldura();
-	gotoxy(30, 5);
-	setColor(9);
-	printf("-> MENU INSERIR <-");
+  system("cls");
+  desenharMoldura();
+  gotoxy(30, 5);
+  setColor(9);
+  printf("-> MENU INSERIR <-");
 
-	setColor(15);
-	gotoxy(18, 7);
-	printf("Digite o usuário:  ");
+  setColor(15);
+  gotoxy(18, 7);
+  printf("Digite o usuário:  ");
 
-	while (true) {
-		gotoxy(36, 7);
-		gets(usuario);
+  while (true) {
+    gotoxy(36, 7);
+    gets(registro[0]);
 
-		if (!verificaUsuario(usuario)) {
-			break;
-		}
+    if (!verificaUsuario(registro[0])) {
+      break;
+    }
 
-		setColor(12);
-		gotoxy(18, 10);
-		printf("Usuário já existe! Aperte Enter para tentar");
-		gotoxy(18, 11);
-		printf("novamente com outro nome.");
+    setColor(12);
+    gotoxy(18, 10);
+    printf("Usuário já existe! Aperte Enter para tentar novamente.");
+    gotoxy(18, 11);
+    printf("novamente com outro nome.");
 
-		getch();
+    getch();
 
-		setColor(15);
-		gotoxy(36, 7);
-		printf("                         ");
-		gotoxy(18, 10);
-		printf("                                               ");
-		gotoxy(18, 11);
-		printf("                                      ");
-	}
+    setColor(15);
+    gotoxy(36, 7);
+    printf("                         ");
+    gotoxy(18, 10);
+    printf("                                               ");
+    gotoxy(18, 11);
+    printf("                                      ");
+  }
 
-	while (true) {
-		setColor(15);
-		gotoxy(18, 8);
-		printf("Digite a senha: ");
-		gets(senha);
+  while (true) {
+    setColor(15);
+    gotoxy(18, 8);
+    printf("Digite a senha: ");
+    gets(registro[1]);
 
-		if (verificaSenha(senha)) {
-			break;
-		}
-		else {
-			gotoxy(18, 10);
+    if (verificaSenha(registro[1])) {
+      break;
+    } else {
+      gotoxy(18, 10);
       printf("Senha inválida!\n");
       gotoxy(18, 11);
       printf("-> 8 a 12 caracteres\n");
@@ -312,12 +307,12 @@ void inserirUsuario() {
       printf("-> Deve ter caractere especial\n");
       gotoxy(18, 15);
       printf("-> Para tentar novamente, aperte Enter!");
-      getch(); 
-                       
-      gotoxy(18,8);
+      getch();
+
+      gotoxy(18, 8);
       printf("                                              ");
       gotoxy(18, 10);
-      printf("                                               "); 
+      printf("                                               ");
       gotoxy(18, 11);
       printf("                                               ");
       gotoxy(18, 12);
@@ -328,29 +323,29 @@ void inserirUsuario() {
       printf("                                               ");
       gotoxy(18, 15);
       printf("                                               ");
-		}
-	}
+    }
+  }
 
-	criptografia(usuario);
-	criptografia(senha);
+  criptografia(registro[0]);
+  criptografia(registro[1]);
 
-	arquivo = fopen("usuarios.txt", "a");
-	if (arquivo == NULL) {
-		gotoxy(18, 14);
-		printf("Erro ao abrir o arquivo!\n");
-		return;
-	}
+  arquivo = fopen("usuarios.txt", "a");
+  if (arquivo == NULL) {
+    gotoxy(18, 14);
+    printf("Erro ao abrir o arquivo!\n");
+    return;
+  }
 
-	fprintf(arquivo, "Usuário: %s | Senha: %s\n", usuario, senha);
-	fclose(arquivo);
+  fprintf(arquivo, "Usuário: %s | Senha: %s\n", registro[0], registro[1]);
+  fclose(arquivo);
 
-	setColor(10);
-	gotoxy(18, 14);
-	printf("Usuário inserido com sucesso!\n");
+  setColor(10);
+  gotoxy(18, 14);
+  printf("Usuário inserido com sucesso!\n");
 
-	gotoxy(18, 16);
-	printf("Para voltar, pressione qualquer tecla");
-	getch();
+  gotoxy(18, 16);
+  printf("Para voltar, pressione qualquer tecla");
+  getch();
 }
 
 /*-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
@@ -413,7 +408,7 @@ void alterarUsuario() {
 
   setColor(15);
   gotoxy(18, 7);
-  printf("Informe: o usuário: ");
+  printf("Informe o usuário: ");
   gets(usuario);
   criptografia(usuario);
   arquivo = fopen("usuarios.txt", "r");
@@ -433,73 +428,72 @@ void alterarUsuario() {
       printf("Digite o novo nome de usuário: ");
       gets(novoUsuario);
 
-      gotoxy(18, 10);
-      printf("Digite a nova senha: ");
-      gets(novaSenha);
-
-      while (!verificaSenha(novaSenha)) {
-        gotoxy(18, 10);
-        printf("Senha inválida!\n");
-        gotoxy(18, 11);
-        printf("-> 8 a 12 caracteres\n");
-        gotoxy(18, 12);
-        printf("-> Deve ter maiúscula, minúscula\n");
-        gotoxy(18, 13);
-        printf("-> Deve ter número\n");
-        gotoxy(18, 14);
-        printf("-> Deve ter caractere especial\n");
-        gotoxy(18, 15);
-        printf("-> Para tentar novamente, aperte Enter!");
-        getch();
-
-
-        gotoxy(18, 8);
-        printf("                                              ");
-        gotoxy(18, 10);
-        printf("                                               ");
-        gotoxy(18, 11);
-        printf("                                               ");
-        gotoxy(18, 12);
-        printf("                                               ");
-        gotoxy(18, 13);
-        printf("                                               ");
-        gotoxy(18, 14);
-        printf("                                               ");
-        gotoxy(18, 15);
-        printf("                                               ");
-
-       
+      while (1) {
         gotoxy(18, 10);
         printf("Digite a nova senha: ");
         gets(novaSenha);
+
+        if (verificaSenha(novaSenha)) {
+          break;  
+        } else {
+          gotoxy(18, 12);
+          printf("Senha inválida!\n");
+          gotoxy(18, 13);
+          printf("-> Deve ter entre 8 e 12 caracteres\n");
+          gotoxy(18, 14);
+          printf("-> Deve incluir letras maiúsculas e minúsculas\n");
+          gotoxy(18, 15);
+          printf("-> Deve conter pelo menos um número\n");
+          gotoxy(18, 16);
+          printf("-> Deve ter um caractere especial\n");
+          gotoxy(18, 18);
+          printf("Pressione Enter para tentar novamente.");
+          getch();
+          
+
+          gotoxy(18, 10);
+          printf("                       ");
+          gotoxy(18, 12);
+          printf("                       ");
+          gotoxy(18, 13);
+          printf("                                       ");
+          gotoxy(18, 14);
+          printf("                                       ");
+          gotoxy(18, 15);
+          printf("                                       ");
+          gotoxy(18, 16);
+          printf("                                       ");
+          gotoxy(18, 18);
+          printf("                                       ");
+        }
       }
 
       criptografia(novoUsuario);
       criptografia(novaSenha);
-
       fprintf(temp, "Usuário: %s | Senha: %s\n", novoUsuario, novaSenha);
     } else {
-      fputs(linha, temp);
+      fprintf(temp, "%s", linha);  
     }
   }
 
   fclose(arquivo);
   fclose(temp);
 
-  remove("usuarios.txt");
-  rename("temp.txt", "usuarios.txt");
-
-  gotoxy(18, 13);
   if (encontrado) {
+    remove("usuarios.txt");
+    rename("temp.txt", "usuarios.txt");
+    gotoxy(18, 20);
     setColor(10);
-    printf("Usuário alterado com sucesso!\n");
+    printf("Usuário atualizado com sucesso!\n");
   } else {
+    remove("temp.txt");
+    gotoxy(18, 20);
     setColor(12);
     printf("Usuário não encontrado!\n");
   }
 
-  gotoxy(18, 15);
-  printf("Para voltar, pressione qualquer tecla");
+  gotoxy(18, 22);
+  printf("Pressione qualquer tecla para voltar.");
   getch();
 }
 /*-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=

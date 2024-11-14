@@ -1,10 +1,10 @@
 # AEP 2024
 
-## Sobre o projeto
-
 # Diagrama de Caso de Uso 
 ![Diagrama de Caso de Uso](https://i.imgur.com/JkaSdz1.png)
 
+
+## Sobre o projeto
 Este projeto consiste em um mini menu que permite a inserção e remoção de usuários e senhas, com as seguintes verificações de segurança para a senha:
 
 - 8 a 12 caracteres;

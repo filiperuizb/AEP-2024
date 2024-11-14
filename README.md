@@ -1,6 +1,6 @@
 # AEP 2024
 
-# Diagrama de Caso de Uso 
+## Diagrama de Caso de Uso 
 ![Diagrama de Caso de Uso](https://i.imgur.com/JkaSdz1.png)
 
 
